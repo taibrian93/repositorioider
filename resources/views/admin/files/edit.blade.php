@@ -3,7 +3,18 @@
 @section('title', 'Repositorio')
 
 @section('content_header')
-    <h1>Editar Archivo</h1>
+    <div class="row mb-2">
+        <div class="col-sm-6">
+            <h1>Editar Archivo</h1>
+        </div>
+        <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item"><a href="/admin">Inicio</a></li>
+                <li class="breadcrumb-item"><a href="/admin/files">Archivo</a></li>
+                <li class="breadcrumb-item active">Editar Archivo</li>
+            </ol>
+        </div> 
+    </div>
 @stop
 
 @section('content')
@@ -33,16 +44,8 @@
 </div>
 @stop
 
-@section('footer')
-    <strong>Copyright &copy; 2019-2021 <a href="https://geoportal.regionloreto.gob.pe">IDER - Loreto</a>.</strong>
-    Todos los derechos reservados.
-    <div class="float-right d-none d-sm-inline-block">
-    <b>Version</b> 1.0.0
-    </div>
-@endsection
-
 @section('css')
-    <link rel="stylesheet" href="/css/admin_custom.css">
+    
 @stop
 
 @section('js')

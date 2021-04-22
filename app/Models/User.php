@@ -30,6 +30,7 @@ class User extends Authenticatable
         'idNode',
         'name',
         'email',
+        'dni',
         'password',
     ];
 

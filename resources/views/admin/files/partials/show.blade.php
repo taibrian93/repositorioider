@@ -51,9 +51,15 @@
 <div class="form-group">
     {!! Form::label('archivo', 'Archivo: ') !!}
     <br>
-    <a href="{{ Storage::url($file->enlace) }}" target="_blank">
-        {{ $file->codigo.'.'.$file->extensionArchivo }}
-    </a>
+    @if ($file->estado == 0)
+        <a href="/admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
+            {{ $file->codigo }}
+        </a>
+    @else
+        <a href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
+            {{ $file->codigo }}
+        </a>
+    @endif
 </div>
 
 <div class="form-group">

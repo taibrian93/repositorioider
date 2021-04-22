@@ -54,6 +54,7 @@ class UserController extends Controller
             'idNode' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'dni' => 'required|min:8|max:8|regex:/^[0-9]*$/|unique:users,dni',
             'password' => 'required|min:6',
         ]);
 
@@ -61,11 +62,12 @@ class UserController extends Controller
             'idNode' => $request->idNode,
             'name' => $request->name,
             'email' => $request->email,
+            'dni' => $request->dni,
             'password' => Hash::make($request->password)
         ]);
         
         $user->roles()->attach($request->roles);
-        return redirect()->route('admin.users.index')->with('info', '¡El usuario se creo satisfactoriamente!');
+        return redirect()->route('admin.users.index')->with('info', $user->id);
 
     }
 
@@ -107,12 +109,14 @@ class UserController extends Controller
             'idNode' => 'required',
             'name' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
+            'dni' => 'required|min:8|max:8|regex:/^[0-9]*$/|unique:users,dni,' . $user->id,
         ]);
 
         $update = [
             'idNode' => $request->idNode,
             'name' => $request->name,
             'emai' => $request->email,
+            'dni' => $request->dni,
         ];
 
         $pass = ($request->password != '' ? [

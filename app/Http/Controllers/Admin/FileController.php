@@ -117,7 +117,7 @@ class FileController extends Controller
             $month = date('m');
             $yearMonth = $year.'/'.$month;
 
-            if($request->enlace == 1){
+            if($request->estado == 1){
                 $filePath = 'public/files/'.$yearMonth;
             } else{
                 $filePath = 'private/files/'.$yearMonth;
@@ -265,18 +265,17 @@ class FileController extends Controller
 
             // Delete File
             Storage::delete($file->enlace);
+
             // Save File
             $year = date('Y');
             $month = date('m');
             $yearMonth = $year.'/'.$month;
 
-            if($request->enlace == 1){
+            if($request->estado == 1){
                 $filePath = 'public/files/'.$yearMonth;
             } else{
                 $filePath = 'private/files/'.$yearMonth;
             }
-
-            $filePath = 'public/files/'.$yearMonth;
 
             $fileExt = $request->file('archivo')->extension();
             $fileSize = $request->file('archivo')->getSize();
@@ -298,9 +297,9 @@ class FileController extends Controller
             ]);
 
         } else{
+
             $codTypeFormat = TypeFormat::select('type_formats.codigo','type_formats.id')->leftJoin('type_extensions', 'type_extensions.idTypeFormat', '=', 'type_formats.id')->where('type_extensions.descripcion', '=', $file->extensionArchivo)->first();
             $codigo = $codDepartment->codigoDepartamental.''.$codProvince->codigo.''.$codDistrict->codigo.''.$codPopulationCenter->codigo.''.$codTypeDocument->codigo.''.$codTypeFormat->codigo.''.$codLanguage->codigo.''.$codNode->codigo.''.$file->id;
-            
 
             if($file->estado != $request->estado ){
 
@@ -316,8 +315,7 @@ class FileController extends Controller
                     $filePath = 'public/files/'.$yearMonth;
                     
                 } else{
-                    $filePath = 'private/files/'.$yearMonth;
-                    
+                    $filePath = 'private/files/'.$yearMonth;          
                 }
 
                 $newPath = $filePath.'/'.$codigo.'.'.$file->extensionArchivo;
@@ -326,6 +324,14 @@ class FileController extends Controller
 
                 $enlace = $newPath;
 
+                $request->request->add([
+                    'enlace' => $enlace, 
+                ]);
+
+            } else {
+
+                $enlaceExplode = explode('/', $file->enlace);
+                $enlace = $enlaceExplode[0].'/'.$enlaceExplode[1].'/'.$enlaceExplode[2].'/'.$enlaceExplode[3].'/'.$codigo.'.'.$file->extensionArchivo;
                 $request->request->add([
                     'enlace' => $enlace, 
                 ]);

@@ -52,6 +52,7 @@
         </div>
 
         {{-- Footer --}}
+        
         <footer class="main-footer">
             <strong>Copyright &copy; 2019-2021 <a href="https://geoportal.regionloreto.gob.pe">IDER - Loreto</a>.</strong>
             Todos los derechos reservados.
@@ -59,6 +60,7 @@
             <b>Version</b> 1.0.0
             </div>
         </footer>
+
         {{-- @hasSection('footer')
             @include('adminlte::partials.footer.footer')
         @endif --}}
