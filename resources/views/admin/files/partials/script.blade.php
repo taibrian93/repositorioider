@@ -147,7 +147,7 @@
                     
                     if(results.length > 0){
                         results.forEach(function(result) {
-                            $('.province').append('<option value="'+result.id+'">'+result.descripcion+'</option>');
+                            $('.province').append('<option value="'+result.id+'">'+result.descripcion+' - '+result.codigo+'</option>');
                         });    
                     }
                 },
@@ -242,7 +242,7 @@
                     $('.populationCenter').find("option:not(:first)").remove();
                     if(results.length > 0){
                         results.forEach(function(result) {
-                            $('.district').append('<option value="'+result.id+'">'+result.descripcion+'</option>');
+                            $('.district').append('<option value="'+result.id+'">'+result.descripcion+' - '+result.codigo+'</option>');
                         });    
                     }
                 },
@@ -283,7 +283,7 @@
                     $('.populationCenter').find("option:not(:first)").remove();
                     if(results.length > 0){
                         results.forEach(function(result) {
-                            $('.populationCenter').append('<option value="'+result.id+'">'+result.descripcion+'</option>');
+                            $('.populationCenter').append('<option value="'+result.id+'">'+result.descripcion+' - '+result.codigo+'</option>');
                         });    
                     }
                 },

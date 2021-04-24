@@ -16,7 +16,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 use Illuminate\Support\Facades\Validator;
@@ -50,7 +50,7 @@ class FileController extends Controller
      */
     public function create()
     {
-        $departments = Department::pluck('descripcion','id');
+        $departments = Department::select('id', DB::raw('CONCAT(descripcion, " - ", codigoDepartamental) AS descripcion'))->pluck('descripcion','id');
         $typeDocuments = TypeDocument::pluck('descripcion','id');
         $languages = Language::pluck('descripcion','id');
         return view('admin.files.create',compact('departments','typeDocuments','languages'));
@@ -123,7 +123,7 @@ class FileController extends Controller
                 $filePath = 'private/files/'.$yearMonth;
             }
             
-            $fileExt = $request->file('archivo')->extension();
+            $fileExt = $request->file('archivo')->getClientOriginalExtension();
             $fileSize = $request->file('archivo')->getSize();
             $fileMime = $request->file('archivo')->getMimeType();
 
@@ -277,7 +277,7 @@ class FileController extends Controller
                 $filePath = 'private/files/'.$yearMonth;
             }
 
-            $fileExt = $request->file('archivo')->extension();
+            $fileExt = $request->file('archivo')->getClientOriginalExtension();
             $fileSize = $request->file('archivo')->getSize();
             $fileMime = $request->file('archivo')->getMimeType();
 
