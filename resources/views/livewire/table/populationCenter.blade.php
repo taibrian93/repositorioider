@@ -1,5 +1,6 @@
 <x-table>
-
+    @slot('advancedSearch')
+    @endslot
     @slot('selectFilter')
         <select class="form-control" wire:model="selectFilter">
             <option value="titulo">Título</option>
@@ -8,7 +9,7 @@
     @endslot
     
     <x-slot name="button">
-        <a href="{{ route('admin.populationCenters.create') }}" class="btn btn-success">Crear Centro Poblado</a>
+        <a href="{{ route('admin.populationCenters.create') }}" class="btn btn-success float-right">Crear Centro Poblado</a>
     </x-slot>
 
     <x-slot name="head">

@@ -1,9 +1,11 @@
 <x-table>
+    @slot('advancedSearch')
+    @endslot
     @slot('selectFilter')
         
     @endslot
     <x-slot name="button">
-        <a href="{{ route('admin.users.create') }}" class="btn btn-success">Crear Usuario</a>
+        <a href="{{ route('admin.users.create') }}" class="btn btn-success float-right">Crear Usuario</a>
     </x-slot>
 
     <x-slot name="head">

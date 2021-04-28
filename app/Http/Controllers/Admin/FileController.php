@@ -13,6 +13,7 @@ use App\Models\Province;
 use App\Models\TypeDocument;
 use App\Models\TypeFormat;
 use App\Models\User;
+
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -40,6 +41,7 @@ class FileController extends Controller
     public function index()
     {
         $file = File::class;
+
         return view('admin.files.index', compact('file'));
     }
 
@@ -64,16 +66,7 @@ class FileController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->validate([
-        //     'idDepartment' => 'required',
-        //     'idProvince' => 'required',
-        //     'idDistrict' => 'required',
-        //     'idTypeDocument' => 'required',
-        //     'idLanguage' => 'required',
-        //     'titulo' => 'required',
-        //     'descripcion' => 'required',
-        //     'archivo' => 'required',
-        // ]);
+        
 
         $rules = array(
             'idDepartment' => 'required',
@@ -84,6 +77,7 @@ class FileController extends Controller
             'idLanguage' => 'required',
             'titulo' => 'required',
             'descripcion' => 'required',
+            'tags' => 'required',
             'archivo' => 'required',
         );
 
@@ -110,6 +104,9 @@ class FileController extends Controller
         $codNode = Node::select('codigo')->where('id', '=', $request->idNode)->first();
 
         $file = File::create($request->all());
+        
+        $tags = explode(',', $request->tags);
+        $file->tag($tags);
         
         if($request->file('archivo')){
 
@@ -142,8 +139,7 @@ class FileController extends Controller
         $file->idTypeFormat = $codTypeFormat->id; 
         $file->save();
 
-        return $codigo;
-        //redirect()->route('admin.files.index')->with('info', $codigo);
+        redirect()->route('admin.files.index')->with('info', $codigo);
     }
 
     /**
@@ -154,15 +150,20 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        $departments = Department::pluck('descripcion','id');
+        $departments = Department::select('id', DB::raw("CONCAT(descripcion,' - ', codigoDepartamental) AS descripcion"))
+                    ->pluck('descripcion','id');
         
-        $provinces = Province::select('descripcion', 'id')
+        $provinces = Province::select('id', DB::raw("CONCAT(provinces.descripcion,' - ', provinces.codigo) AS descripcion"))
                     ->where('idDepartment', '=', $file->idDepartment)
                     ->pluck('descripcion','id');
 
-        $districts = District::select('descripcion', 'id')
+        $districts = District::select('id', DB::raw("CONCAT(districts.descripcion,' - ', districts.codigo) AS descripcion"))
                     ->where('idProvince', '=', $file->idProvince)
                     ->pluck('descripcion','id');
+
+        $populationCenters = PopulationCenter::select('id', DB::raw("CONCAT(population_centers.descripcion,' - ', population_centers.codigo) AS descripcion"))
+                    ->where('idDistrict', '=', $file->idDistrict)
+                    ->pluck('descripcion', 'id');
 
         $typeDocuments = TypeDocument::pluck('descripcion','id');
         $typeFormats = TypeFormat::pluck('descripcion','id');
@@ -173,7 +174,9 @@ class FileController extends Controller
                 ->where('files.id','=',$file->id)
                 ->first();
 
-        return view('admin.files.show', compact('file','departments','provinces','districts','typeDocuments','typeFormats','languages'));
+        $nodes = Node::pluck('descripcion','id');
+
+        return view('admin.files.show', compact('file','departments','provinces','districts', 'populationCenters','typeDocuments','nodes','typeFormats','languages'));
     }
 
     /**
@@ -186,15 +189,15 @@ class FileController extends Controller
     {
         $departments = Department::pluck('descripcion','id');
         
-        $provinces = Province::select('descripcion', 'id')
+        $provinces = Province::select('id', DB::raw("CONCAT(provinces.descripcion,' - ', provinces.codigo) AS descripcion"))
                     ->where('idDepartment', '=', $file->idDepartment)
                     ->pluck('descripcion','id');
 
-        $districts = District::select('descripcion', 'id')
+        $districts = District::select('id', DB::raw("CONCAT(districts.descripcion,' - ', districts.codigo) AS descripcion"))
                     ->where('idProvince', '=', $file->idProvince)
                     ->pluck('descripcion','id');
 
-        $populationCenters = PopulationCenter::select('descripcion', 'id')
+        $populationCenters = PopulationCenter::select('id', DB::raw("CONCAT(population_centers.descripcion,' - ', population_centers.codigo) AS descripcion"))
                             ->where('idDistrict', '=', $file->idDistrict)
                             ->pluck('descripcion', 'id');
 
@@ -214,25 +217,15 @@ class FileController extends Controller
     // public function update(Request $request, File $file)
     public function update(Request $request)
     {
-        // $request->validate([
-        //     'idDepartment' => 'required',
-        //     'idProvince' => 'required',
-        //     'idDistrict' => 'required',
-        //     'idTypeDocument' => 'required',
-        //     'idLanguage' => 'required',
-        //     'titulo' => 'required',
-        //     'descripcion' => 'required',
-        //     'estado' => 'required',
-        // ]);
-
         $rules = array(
             'idDepartment' => 'required',
             'idProvince' => 'required',
             'idDistrict' => 'required',
-             'idPopulationCenter' => 'required',
+            'idPopulationCenter' => 'required',
             'idTypeDocument' => 'required',
             'idLanguage' => 'required',
             'titulo' => 'required',
+            'tags' => 'required',
             'descripcion' => 'required',
         );
         
@@ -299,8 +292,10 @@ class FileController extends Controller
         } else{
 
             $codTypeFormat = TypeFormat::select('type_formats.codigo','type_formats.id')->leftJoin('type_extensions', 'type_extensions.idTypeFormat', '=', 'type_formats.id')->where('type_extensions.descripcion', '=', $file->extensionArchivo)->first();
+            $codTypeFormat = $codTypeFormat == null ? TypeFormat::select('codigo','id')->where('codigo', '=', '00')->first() : $codTypeFormat;
+            //dd($codTypeFormat->codigo);
             $codigo = $codDepartment->codigoDepartamental.''.$codProvince->codigo.''.$codDistrict->codigo.''.$codPopulationCenter->codigo.''.$codTypeDocument->codigo.''.$codTypeFormat->codigo.''.$codLanguage->codigo.''.$codNode->codigo.''.$file->id;
-
+            
             if($file->estado != $request->estado ){
 
                 $year = date('Y');
@@ -344,6 +339,9 @@ class FileController extends Controller
         }
         
         $file->update($request->all());
+
+        $tags = explode(',', $request->tags);
+        $file->retag($tags);
 
         redirect()->route('admin.files.edit', $file)->with('info', $codigo);
         return response()->json($file->id);

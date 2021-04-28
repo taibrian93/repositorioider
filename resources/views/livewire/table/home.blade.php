@@ -1,5 +1,5 @@
 <x-home-table>
-
+    
     @slot('selectFilter')
         <select class="form-control" wire:model="selectFilter">
             <option value="titulo">Título</option>
@@ -12,6 +12,7 @@
             <th>Nro.</th>
             <th>Titulo</th>
             <th>Codigo</th>
+            
             <th>Fecha Creación</th>
             <th>Fecha Actualización</th>
             <th style="width: 15%"></th>
@@ -34,6 +35,7 @@
                         </a>
                     @endif
                 </td>
+                
                 <td>{{ $file->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>
                 <td>

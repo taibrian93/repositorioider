@@ -1,5 +1,19 @@
 <script>
+    
+    
+
     $(document).ready(function() {
+
+        for (const el of document.querySelectorAll('.tagin')) {
+            tagin (el)
+        }
+
+        $('input').on('keypress', function(e){
+            if(e.keyCode == 13){
+                e.preventDefault();
+                return false;
+            }
+        });
 
         var meta = $("meta[name='csrf-token']").attr("content");
         var codigoDepartamental = $('option:selected', '.department').val() != '' ? $('option:selected', '.department').val() : '';
@@ -23,6 +37,7 @@
             } else{
                 $('.province').find("option:not(:first)").remove();
                 $('.district').find("option:not(:first)").remove();
+                $('.populationCenter').find("option:not(:first)").remove();
             }
         });
 
@@ -113,8 +128,8 @@
                     if(results.length > 0){
                         results.forEach(function(result) {
                             console.log(result.idDistrict)
-                            $('.district').append('<option value="'+result.idDistrict+'">'+result.district+'</option>');
-                            $('.populationCenter').append('<option value="'+result.idPopulationCenter+'">'+result.populationCenter+'</option>');
+                            $('.district').append('<option value="'+result.idDistrict+'">'+result.district+' - 00</option>');
+                            $('.populationCenter').append('<option value="'+result.idPopulationCenter+'">'+result.populationCenter+' - 0000</option>');
                         });
                         $('.district option:eq(1)').prop('selected', true);
                         $('.populationCenter option:eq(1)').prop('selected', true);
@@ -211,7 +226,7 @@
                     console.log(results);
                     if(results.length > 0){
                         results.forEach(function(result) {
-                            $('.populationCenter').append('<option value="'+result.idPopulationCenter+'">'+result.populationCenter+'</option>');
+                            $('.populationCenter').append('<option value="'+result.idPopulationCenter+'">'+result.populationCenter+' - 0000</option>');
                         });
                         $('.populationCenter option:eq(1)').prop('selected', true);
                     }
@@ -291,8 +306,6 @@
             });
         }
 
-
-
         $("#formFile").on('submit', function(e){
             e.preventDefault();
             
@@ -322,6 +335,7 @@
                         $(".progress-bar").css("width", percentVal);
                         $(".progress-bar").text(percentVal);
                         $('.btn-submit').prop('disabled', false);
+                        $('.file').val('');
                     }
                    
                 },
@@ -351,6 +365,7 @@
                 processData: false,
                 contentType: false,
                 success: function(result){
+                    console.log(result)
                     if($.isEmptyObject(result.error)){
                         
                         moveLocation(result);
@@ -360,6 +375,7 @@
                         $(".progress-bar").css("width", percentVal);
                         $(".progress-bar").text(percentVal);
                         $('.btn-submit').prop('disabled', false);
+                        $('.file').val('');
                     }
                    
                 },

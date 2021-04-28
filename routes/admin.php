@@ -46,6 +46,7 @@ Route::post('populationCenters/getPopulationCenters', [PopulationCenterControlle
 Route::resource('typeFormats', TypeFormatController::class)->names('typeFormats');
 
 Route::resource('typeExtensions', TypeExtensionController::class)->names('typeExtensions');
+Route::post('typeExtensions/getTypeExtensions', [TypeExtensionController::class, 'getListTypeExtensions'])->name('getListTypeExtensions');
 
 Route::resource('files', FileController::class)->names('files');
 

@@ -19,13 +19,28 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('name', 'Distrito: ') !!}
+    {!! Form::select('idDistrict', isset($districts) ? $districts : [], null, ['class' => 'form-control district','disabled' => '']) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('name', 'Centro Poblado (*): ') !!}
+    {!! Form::select('idPopulationCenter', isset($populationCenters) ? $populationCenters : [], null, ['class' => 'form-control populationCenter', 'disabled' => '']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('name', 'Tipo Documento: ') !!}
     {!! Form::select('idTypeDocument',$typeDocuments, null, ['class' => 'form-control','disabled' => '']) !!}
 </div>
 
 <div class="form-group">
     {!! Form::label('name', 'Tipo Formato: ') !!}
-    {!! Form::select('idTypeFormat',$typeFormats, null, ['class' => 'form-control','disabled' => '']) !!}
+    {!! Form::select('idTypeFormat', $typeFormats, null, ['class' => 'form-control','disabled' => '']) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('extensionArchivo', 'Tipo Extensión: ') !!}
+    {!! Form::text('extensionArchivo', null, ['class' => 'form-control','disabled' => '']) !!}
 </div>
 
 <div class="form-group">
@@ -41,6 +56,11 @@
 <div class="form-group">
     {!! Form::label('descripcion', 'Descripción: ') !!}
     {!! Form::text('descripcion', null, ['class' => 'form-control','readonly' => '']) !!}
+</div>
+
+<div class="form-group">
+    {!! Form::label('name', 'Nodo: ') !!}
+    {!! Form::select('idNode', $nodes, null, ['class' => 'form-control','disabled' => '']) !!}
 </div>
 
 <div class="form-group">
@@ -60,6 +80,11 @@
             {{ $file->codigo }}
         </a>
     @endif
+</div>
+
+<div class="form-group">
+    {!! Form::label('tags', 'Palabras Clave (*): ') !!}
+    {!! Form::text('tags', $file->tagList ?? null, ['class' => 'form-control' . ($errors->has('tags') ? ' is-invalid' : ''), 'disabled' => '']) !!}
 </div>
 
 <div class="form-group">

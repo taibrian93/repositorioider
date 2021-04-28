@@ -16,7 +16,7 @@
                     </div>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        ¡El registro con codigo <strong>{{ session('info') }}</strong> se modifico satisfactoriamente!
+                        ¡El registro con codigo <strong>{{ session('info') }}</strong> se agrego satisfactoriamente!
                     </div>
                     <!-- /.card-body -->
                 </div>
@@ -24,32 +24,37 @@
                     
             @endif
 
-            <div class="card">
-                <div class="card-body">
+            <div class="row">
+                <div class="col-md-12 mb-4">
                     {{ $button }}
                 </div>
             </div>
+
+            {{ $advancedSearch }}
             <div class="card">
                 <div class="card-header">
                     
+                    
+
                     <div class="card-tools">
                         
-                      <div class="input-group input-group-sm">
-
-                        {{ $selectFilter }}
-
-                        <input wire:keydown="cleanPage" wire:model="search" type="text" class="form-control float-right" placeholder="Buscar">
-                        
-                        <div class="input-group-append">
-                            <span class="input-group-text">
-                                <i class="fas fa-search"></i>
-                            </span>
+                        <div class="input-group input-group-sm">
+  
+                            {{ $selectFilter }}
+    
+                            <input wire:keydown="cleanPage" wire:model="search" type="text" class="form-control float-right" placeholder="Buscar">
+                            
+                            <div class="input-group-append">
+                                <span class="input-group-text">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
                         </div>
-                      </div>
                     </div>
                 </div>
 
                 <div class="card-body">
+
                     <table class="table table-responsive">
                         <thead>
                             {{ $head }}

@@ -16,6 +16,17 @@ class TypeExtensionController extends Controller
         $this->middleware('can:Editar Tipo Extension')->only('edit', 'update');
         $this->middleware('can:Eliminar Tipo Extension')->only('destroy');
     }
+
+    public function getListTypeExtensions(Request $request){
+        $typeExtensions = TypeExtension::select('type_extensions.*')
+                    ->leftJoin('type_formats', 'type_formats.id', '=', 'type_extensions.idTypeFormat')
+                    ->where('type_formats.id', '=', $request->idTypeFormat)
+                    ->orderBy('type_extensions.descripcion', 'asc')
+                    ->get();
+        
+        echo json_encode($typeExtensions);
+    }
+
     /**
      * Display a listing of the resource.
      *

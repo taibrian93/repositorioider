@@ -1,9 +1,11 @@
 <x-table>
+    @slot('advancedSearch')
+    @endslot
     @slot('selectFilter')
         
     @endslot
     <x-slot name="button">
-        <a href="{{ route('admin.districts.create') }}" class="btn btn-success">Crear Distrito</a>
+        <a href="{{ route('admin.districts.create') }}" class="btn btn-success float-right">Crear Distrito</a>
     </x-slot>
 
     <x-slot name="head">
