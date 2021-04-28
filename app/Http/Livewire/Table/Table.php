@@ -284,7 +284,7 @@ class Table extends Component
                 $files = $this->model::select('files.*', 'nodes.siglas')
                         ->leftJoin('nodes', 'nodes.id', '=', 'files.idNode')
                         ->where('idNode', '=', Auth::user()->idNode)
-                        ->where($this->selectFilter,'LIKE','%'. $this->search .'%')
+                        ->where('files.'.$this->selectFilter,'LIKE','%'. $this->search .'%')
                         ->orderBy('id','desc')
                         ->paginate(10);
                 return [
@@ -297,7 +297,7 @@ class Table extends Component
                 $files = $this->model::select('files.*', 'nodes.siglas')
                         ->leftJoin('nodes', 'nodes.id', '=', 'files.idNode')
                         ->where('files.estado', '=', 1)
-                        ->where($this->selectFilter,'LIKE','%'. $this->search .'%')
+                        ->where('files.'.$this->selectFilter,'LIKE','%'. $this->search .'%')
                         ->orderBy('files.id','desc')
                         ->paginate(10);
                 
