@@ -325,12 +325,13 @@ return [
             'active'    => ['admin/files*'],
         ],
 
-        // ['header' => 'account_settings'],
-        // [
-        //     'text' => 'profile',
-        //     'url'  => 'admin/settings',
-        //     'icon' => 'fas fa-fw fa-user',
-        // ],
+        ['header' => 'account_settings'],
+        [
+            'text' => 'profile',
+            'url'  => 'admin/profiles',
+            'icon' => 'fas fa-fw fa-user',
+            'active'    => ['admin/profiles*'],
+        ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',

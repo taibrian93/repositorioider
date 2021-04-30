@@ -20,6 +20,8 @@ Route::get('', [HomeController::class, 'index'])->name('home');
 Route::resource('roles', RoleController::class)->names('roles');
 
 Route::resource('users', UserController::class)->names('users');
+Route::get('profiles', [UserController::class, 'profile'])->name('profiles');
+Route::put('profiles/update/{user}', [UserController::class, 'updateProfile'])->name('profile.update');
 
 Route::resource('nodes', NodeController::class)->names('nodes');
 

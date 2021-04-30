@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Node;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
 
@@ -27,6 +28,45 @@ class UserController extends Controller
     {
         $user = User::class;
         return view('admin.users.index', compact('user'));
+    }
+
+    public function profile(){
+        $user = User::select('users.*', 'nodes.descripcion AS descripcionNodo')
+                ->leftJoin('nodes', 'nodes.id', '=', 'users.idNode')
+                ->find(Auth::user()->id);
+
+        return view('admin.profiles.index', compact('user'));
+    }
+
+    public function updateProfile(Request $request, User $user){
+
+        $request->validate([
+            'oldPassword' => 'required|min:6',
+            'newPassword' => 'required|min:6',
+            'checkNewPassword' => 'required|min:6',
+        ]);
+
+        $hashedPassword = Auth::user()->password;
+        if(Hash::check($request->oldPassword, $hashedPassword)){
+            if(!Hash::check($request->newPassword, $hashedPassword)){
+                if($request->newPassword === $request->checkNewPassword){
+                    
+                    session()->flash('success','¡La contraseña se actualizo correctamente!');
+                    User::where('id', '=', Auth::user()->id)->update(['password' => Hash::make($request->newPassword)]);
+                    return redirect()->back();
+                } else {
+                    session()->flash('info','¡La nueva contraseña no coincide con el verificador de contraseña!');
+                    return redirect()->back();
+                }
+            } else {
+                session()->flash('info','¡La nueva contraseña no puede ser igual a la antigua!');
+                return redirect()->back();
+            }
+        } else {
+            session()->flash('info','¡La contraseña antigua no coincide!');
+            return redirect()->back();
+        }
+            
     }
 
     /**
