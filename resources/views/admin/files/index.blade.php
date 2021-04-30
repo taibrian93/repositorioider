@@ -62,14 +62,11 @@
 
             $('.typeFormat').on('change', function(e){
                 if($(this).val() != ''){
-                    if($(this).val() == 9){
-                        console.log($(this).val())
-                        $('.divTypeExtension').remove('.typeExtension');
-                        livewire.emit('getIdTypeFormat', e.target.value)
-                    }else{
-                        livewire.emit('getIdTypeFormat', e.target.value)
-                        getListTypeExtensions($(this).val())
-                    }
+                    
+                        
+                    livewire.emit('getIdTypeFormat', e.target.value)
+                    //getListTypeExtensions($(this).val())
+
                     
                 } else {
                     livewire.emit('getIdTypeFormat', 0)

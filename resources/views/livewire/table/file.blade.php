@@ -6,7 +6,7 @@
 
     @slot('advancedSearch')
             
-        {{-- <div class="card collapsed-card" wire:ignore>
+        <div class="card collapsed-card" wire:ignore>
             <div class="card-header">
                 <h3 class="card-title">Búsqueda avanzada</h3>
 
@@ -107,7 +107,7 @@
 
                 <div class="row">
 
-                    <div class="col-md-6">
+                    {{-- <div class="col-md-6">
                         <div class="form-group divTypeExtension">
                             <label for="tipo extension">Tipo Extensión</label>
                             <select class="form-control typeExtension advancedSearch" style="width: 100%;" disabled>
@@ -116,7 +116,7 @@
                             
                         </div>
                         
-                    </div>
+                    </div> --}}
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -125,9 +125,6 @@
                         </div>
                         
                     </div>
-                </div>
-
-                <div class="row">
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -137,15 +134,18 @@
                         
                     </div>
 
+                </div>
+
+                <div class="row">
+
+                    
+
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="descripcion">Descripción</label>
                             <input type="text" class="form-control advancedSearch" placeholder="Escribe una descripción" disabled wire:model="descripcion">
                         </div>
                     </div>
-                </div>
-
-                <div class="row">        
 
                     <div class="col-md-6">
                         <div class="form-group">
@@ -154,9 +154,11 @@
                         </div>
                     </div>
                 </div>
+
+                
             </div>
             
-        </div> --}}
+        </div>
 
     @endslot
 

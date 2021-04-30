@@ -13,7 +13,7 @@ use App\Models\Province;
 use App\Models\TypeDocument;
 use App\Models\TypeFormat;
 use App\Models\User;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
@@ -67,7 +67,7 @@ class FileController extends Controller
     public function store(Request $request)
     {
         
-
+        
         $rules = array(
             'idDepartment' => 'required',
             'idProvince' => 'required',
@@ -80,6 +80,11 @@ class FileController extends Controller
             'tags' => 'required',
             'archivo' => 'required',
         );
+
+        if($request->fechaDocumento != null){
+            $fechaDocumento = Carbon::createFromFormat('d/m/Y',$request->fechaDocumento)->format('Y-m-d');
+            $request->merge(['fechaDocumento' => $fechaDocumento]);
+        }
 
         $error = Validator::make($request->all(), $rules);
 
@@ -187,6 +192,9 @@ class FileController extends Controller
      */
     public function edit(File $file)
     {
+
+        
+        $file->fechaDocumento = date('d-m-Y', strtotime($file->fechaDocumento));
         $departments = Department::pluck('descripcion','id');
         
         $provinces = Province::select('id', DB::raw("CONCAT(provinces.descripcion,' - ', provinces.codigo) AS descripcion"))
@@ -228,6 +236,11 @@ class FileController extends Controller
             'tags' => 'required',
             'descripcion' => 'required',
         );
+
+        if($request->fechaDocumento != null){
+            $fechaDocumento = Carbon::createFromFormat('d/m/Y',$request->fechaDocumento)->format('Y-m-d');
+            $request->merge(['fechaDocumento' => $fechaDocumento]);
+        }
         
         $file = File::find($request->id);
         // return response()->json($file);

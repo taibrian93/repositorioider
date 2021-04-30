@@ -110,6 +110,11 @@
 </div>
 
 <div class="form-group">
+    {!! Form::label('fecha', 'Fecha Documento: ') !!}
+    {!! Form::text('fechaDocumento', null, ['class' => 'form-control datemask' . ($errors->has('fechaDocumento') ? ' is-invalid' : ''), 'style' => 'width:100%;', 'data-inputmask-alias' => 'datetime', 'data-inputmask-inputformat' => 'dd/mm/yyyy', 'data-mask' => '']) !!}
+</div>
+
+<div class="form-group">
     {!! Form::label('tags', 'Palabras Clave (*): ') !!}
     {!! Form::text('tags', $file->tagList ?? null, ['class' => 'form-control tagin' . ($errors->has('tags') ? ' is-invalid' : ''), 'data-placeholder' =>  'Escribe una etiqueta', 'data-separator' => ',']) !!}
     @error('tags')

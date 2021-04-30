@@ -3,6 +3,8 @@
     
 
     $(document).ready(function() {
+        //Datemask dd/mm/yyyy
+        $('.datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' });
 
         for (const el of document.querySelectorAll('.tagin')) {
             tagin (el)
