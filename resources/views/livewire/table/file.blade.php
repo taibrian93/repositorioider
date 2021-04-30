@@ -176,6 +176,7 @@
             <th>Nro.</th>
             <th>Titulo</th>
             <th>Codigo</th>
+            <th>Fecha Documento</th>
             <th>Fecha Creación</th>
             <th>Fecha Actualización</th>
             <th style="width: 15%"></th>
@@ -197,6 +198,17 @@
                             {{ $file->codigo }}
                         </a>
                     @endif
+                </td>
+                <td>
+                    @if ($file->fechaDocumento != null) 
+                        {{ date("d/m/Y", strtotime($file->fechaDocumento)) }}
+                        
+                            
+                    @else
+                            
+
+                    @endif
+                   
                 </td>
                 <td>{{ $file->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>
