@@ -1,98 +1,98 @@
 <div class="form-group">
-    <label for="">Título</label>
-    <p class="form-control">{{ $file->titulo }}</p>
+    <label>Título</label>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->titulo }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Descripción</label>
-    <p class="form-control">{{ $file->descripcion }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->descripcion }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Código</label>
-    <p class="form-control">{{ $file->codigo }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->codigo }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Palabras Clave</label>
-    <p class="form-control">{{ $file->tagList }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->tagList }}</p>
 </div>
 
 
 <div class="form-group">
     <label for="">Lenguaje</label>
-    <p class="form-control">{{ $file->language }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->language }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Nodo</label>
-    <p class="form-control">{{ $file->node }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->node }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Encargado</label>
-    <p class="form-control">{{ $file->name }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->name }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Tipo Documento</label>
-    <p class="form-control">{{ $file->typeDocument }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->typeDocument }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Tipo Formato</label>
-    <p class="form-control">{{ $file->typeFormat }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->typeFormat }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Tipo Extensión</label>
-    <p class="form-control">{{ $file->extensionArchivo }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->extensionArchivo }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Departamento</label>
-    <p class="form-control">{{ $file->department }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->department }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Provincia</label>
-    <p class="form-control">{{ $file->province }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->province }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Distrito</label>
-    <p class="form-control">{{ $file->district }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->district }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Centro Poblado</label>
-    <p class="form-control">{{ $file->populationCenter }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->populationCenter }}</p>
 </div>
 
 
 <div class="form-group">
     <label for="">Fecha Documento</label>
-    <p class="form-control">{{ $file->fechaDocumento }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->fechaDocumento }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Fecha Registro</label>
-    <p class="form-control">{{ $file->created_at->format('d-m-Y H:i') }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->created_at->format('d-m-Y H:i') }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Fecha Actualización</label>
-    <p class="form-control">{{ $file->updated_at->format('d-m-Y H:i') }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->updated_at->format('d-m-Y H:i') }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Tamaño Archivo</label>
-    <p class="form-control">{{ Helper::bytesToHuman($file->sizeFile) }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ Helper::bytesToHuman($file->sizeFile) }}</p>
 </div>
 
 <div class="form-group mb-4">
     <label for="">Estado</label>
-    <p class="form-control">{{ $file->estado == 1 ? 'Público' : 'Privado' }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->estado == 1 ? 'Público' : 'Privado' }}</p>
 </div>
 
 <div class="btn-group float-right">

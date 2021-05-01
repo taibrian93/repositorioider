@@ -1,22 +1,22 @@
 <div class="form-group">
     <label for="">Nodo</label>
-    <p class="form-control">{{ $user->descripcionNodo }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $user->descripcionNodo }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Nombre</label>
-    <p class="form-control">{{ $user->name }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $user->name }}</p>
 
 </div>
 
 <div class="form-group">
     <label for="">DNI</label>
-    <p class="form-control">{{ $user->dni }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $user->dni }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Correo</label>
-    <p class="form-control">{{ $user->email }}</p>
+    <p class="bg-light text-dark p-3 rounded text-justify">{{ $user->email }}</p>
 </div>
 
 <div class="form-group">
@@ -40,7 +40,7 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Contraseña Nueva: ') !!}
+    {!! Form::label('name', 'Confirmar Contraseña Nueva: ') !!}
     {!! Form::password('checkNewPassword', array('placeholder' => 'Confirmar Contraseña Nueva', 'class' => 'form-control' . ($errors->has('checkNewPassword') ? ' is-invalid' : '' ) ) ) !!}
     @error('checkNewPassword')
         <span class="invalid-feedback">
