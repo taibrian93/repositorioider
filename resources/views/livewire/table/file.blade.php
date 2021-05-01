@@ -177,7 +177,7 @@
             <th>Titulo</th>
             <th>Codigo</th>
             <th>Fecha Documento</th>
-            <th>Fecha Creación</th>
+            <th>Fecha Registro</th>
             <th>Fecha Actualización</th>
             <th style="width: 15%"></th>
         </tr>

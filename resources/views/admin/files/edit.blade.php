@@ -32,7 +32,7 @@
                     {!! Form::model($file,[ 'files' => true, 'id' => 'formFileUpdate' ]) !!}
                         @include('admin.files.partials.form')
 
-                        {!! Form::submit('Actualizar Archivo', ['class' => 'btn btn-primary mt-2 btn-submit']) !!}
+                        {!! Form::submit('Actualizar Archivo', ['class' => 'btn btn-primary mt-2 btn-submit float-right']) !!}
                     {!! Form::close() !!}
                 </div>
                 

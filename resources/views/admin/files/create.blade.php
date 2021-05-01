@@ -27,7 +27,7 @@
                         {!! Form::open([ 'files' => true, 'id' => 'formFile' ]) !!}
                         @include('admin.files.partials.form')
 
-                        {!! Form::submit('Crear Archivo', ['class' => 'btn btn-primary mt-2 btn-submit']) !!}
+                        {!! Form::submit('Crear Archivo', ['class' => 'btn btn-primary mt-2 btn-submit float-right']) !!}
                         {!! Form::close() !!}
                     </div>
                 </div>

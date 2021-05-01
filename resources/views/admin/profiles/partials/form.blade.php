@@ -1,22 +1,22 @@
 <div class="form-group">
     <label for="">Nodo</label>
-    <p>{{ $user->descripcionNodo }}</p>
+    <p class="form-control">{{ $user->descripcionNodo }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Nombre</label>
-    <p>{{ $user->name }}</p>
+    <p class="form-control">{{ $user->name }}</p>
 
 </div>
 
 <div class="form-group">
     <label for="">DNI</label>
-    <p>{{ $user->dni }}</p>
+    <p class="form-control">{{ $user->dni }}</p>
 </div>
 
 <div class="form-group">
     <label for="">Correo</label>
-    <p>{{ $user->email }}</p>
+    <p class="form-control">{{ $user->email }}</p>
 </div>
 
 <div class="form-group">

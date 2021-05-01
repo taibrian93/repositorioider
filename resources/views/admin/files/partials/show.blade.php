@@ -1,108 +1,108 @@
 <div class="form-group">
-    {!! Form::label('codigo', 'Codigo: ') !!}
-    {!! Form::text('codigo', null, ['class' => 'form-control', 'readonly' => '']) !!}
+    <label for="">Título</label>
+    <p class="form-control">{{ $file->titulo }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Departamento: ') !!}
-    {!! Form::select('idDepartment',$departments, null, ['class' => 'form-control department', 'disabled' => '']) !!}
+    <label for="">Descripción</label>
+    <p class="form-control">{{ $file->descripcion }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Provincia: ') !!}
-    {!! Form::select('idProvince', isset($provinces) ? $provinces : [], null, ['class' => 'form-control province','disabled' => '']) !!}
+    <label for="">Código</label>
+    <p class="form-control">{{ $file->codigo }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Distrito: ') !!}
-    {!! Form::select('idDistrict', isset($districts) ? $districts : [], null, ['class' => 'form-control district','disabled' => '']) !!}
+    <label for="">Palabras Clave</label>
+    <p class="form-control">{{ $file->tagList }}</p>
+</div>
+
+
+<div class="form-group">
+    <label for="">Lenguaje</label>
+    <p class="form-control">{{ $file->language }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Distrito: ') !!}
-    {!! Form::select('idDistrict', isset($districts) ? $districts : [], null, ['class' => 'form-control district','disabled' => '']) !!}
+    <label for="">Nodo</label>
+    <p class="form-control">{{ $file->node }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Centro Poblado (*): ') !!}
-    {!! Form::select('idPopulationCenter', isset($populationCenters) ? $populationCenters : [], null, ['class' => 'form-control populationCenter', 'disabled' => '']) !!}
+    <label for="">Encargado</label>
+    <p class="form-control">{{ $file->name }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Tipo Documento: ') !!}
-    {!! Form::select('idTypeDocument',$typeDocuments, null, ['class' => 'form-control','disabled' => '']) !!}
+    <label for="">Tipo Documento</label>
+    <p class="form-control">{{ $file->typeDocument }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Tipo Formato: ') !!}
-    {!! Form::select('idTypeFormat', $typeFormats, null, ['class' => 'form-control','disabled' => '']) !!}
+    <label for="">Tipo Formato</label>
+    <p class="form-control">{{ $file->typeFormat }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('extensionArchivo', 'Tipo Extensión: ') !!}
-    {!! Form::text('extensionArchivo', null, ['class' => 'form-control','disabled' => '']) !!}
+    <label for="">Tipo Extensión</label>
+    <p class="form-control">{{ $file->extensionArchivo }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Lenguaje: ') !!}
-    {!! Form::select('idLanguage',$languages, null, ['class' => 'form-control','disabled' => '']) !!}
+    <label for="">Departamento</label>
+    <p class="form-control">{{ $file->department }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('titulo', 'Titulo: ') !!}
-    {!! Form::text('titulo', null, ['class' => 'form-control', 'readonly' => '']) !!}
+    <label for="">Provincia</label>
+    <p class="form-control">{{ $file->province }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('descripcion', 'Descripción: ') !!}
-    {!! Form::text('descripcion', null, ['class' => 'form-control','readonly' => '']) !!}
+    <label for="">Distrito</label>
+    <p class="form-control">{{ $file->district }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Nodo: ') !!}
-    {!! Form::select('idNode', $nodes, null, ['class' => 'form-control','disabled' => '']) !!}
+    <label for="">Centro Poblado</label>
+    <p class="form-control">{{ $file->populationCenter }}</p>
+</div>
+
+
+<div class="form-group">
+    <label for="">Fecha Documento</label>
+    <p class="form-control">{{ $file->fechaDocumento }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('encargado', 'Encargado: ') !!}
-    {!! Form::text('name', null, ['class' => 'form-control','readonly' => '']) !!}
+    <label for="">Fecha Registro</label>
+    <p class="form-control">{{ $file->created_at->format('d-m-Y H:i') }}</p>
 </div>
 
 <div class="form-group">
-    {!! Form::label('archivo', 'Archivo: ') !!}
-    <br>
+    <label for="">Fecha Actualización</label>
+    <p class="form-control">{{ $file->updated_at->format('d-m-Y H:i') }}</p>
+</div>
+
+<div class="form-group">
+    <label for="">Tamaño Archivo</label>
+    <p class="form-control">{{ Helper::bytesToHuman($file->sizeFile) }}</p>
+</div>
+
+<div class="form-group mb-4">
+    <label for="">Estado</label>
+    <p class="form-control">{{ $file->estado == 1 ? 'Público' : 'Privado' }}</p>
+</div>
+
+<div class="btn-group float-right">
     @if ($file->estado == 0)
-        <a href="/admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
-            {{ $file->codigo }}
+        <a class="btn btn-app" href="/admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-download"></i> Descargar Archivo <br>
         </a>
     @else
-        <a href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
-            {{ $file->codigo }}
+        <a class="btn btn-app" href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
+            <i class="fas fa-download"></i> Descargar Archivo <br>
         </a>
     @endif
-</div>
-
-<div class="form-group">
-    {!! Form::label('tags', 'Palabras Clave (*): ') !!}
-    {!! Form::text('tags', $file->tagList ?? null, ['class' => 'form-control' . ($errors->has('tags') ? ' is-invalid' : ''), 'disabled' => '']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('create', 'Fecha Creación: ') !!}
-    {!! Form::text('created_at', null, ['class' => 'form-control','readonly' => '']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('create', 'Fecha Actualización: ') !!}
-    {!! Form::text('updated_at', null, ['class' => 'form-control','readonly' => '']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('sizeFile', 'Tamaño Archivo: ') !!}
-    <input type="text" value="{{ Helper::bytesToHuman($file->sizeFile) }}" class="form-control" readonly>
-</div>
-
-<div class="form-group">
-    {!! Form::label('name', 'Estado: ') !!}
-    {!! Form::select('estado', ['Privado', 'Público'], null, ['class' => 'form-control','disabled' => '']) !!}
 </div>

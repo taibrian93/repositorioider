@@ -9,13 +9,16 @@
 
     <x-slot name="head">
         <tr>
-            <th>Nro.</th>
-            <th>Titulo</th>
-            <th>Codigo</th>
-            
-            <th>Fecha Creación</th>
-            <th>Fecha Actualización</th>
-            <th style="width: 15%"></th>
+            <th style="width: 5%">Nro.</th>
+            <th style="width: 41%">Titulo</th>
+            {{-- <th>Código</th> --}}
+
+            <th style="width: 17%">Fecha Registro</th>
+            <th style="width: 17%">Fecha Actualización</th>
+            <th style="width: 10%">
+        
+            </th>
+
         </tr>
     </x-slot>
 
@@ -23,26 +26,30 @@
         @foreach ($files as $key => $file)
             <tr>
                 <td>{{ (($page-1)*10)+($key+1) }}</td>
-                <td>{{ $file->titulo }}</td>
-                <td>
-                    @if ($file->estado == 0)
-                        <a href="admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
-                            {{ $file->codigo }}
-                        </a>
-                    @else
-                        <a href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
-                            {{ $file->codigo }}
-                        </a>
-                    @endif
-                </td>
+                <td style="text-align: justify;">{{ $file->titulo }}</td>
+
                 
                 <td>{{ $file->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>
                 <td>
-                    <a href="{{ route('admin.files.show', $file)}}" class="btn btn-info btn-sm">
-                        <i class="fas fa-eye"></i>
-                         Consultar
-                    </a>
+                    <div class="btn-group">
+                        
+                        @if ($file->estado == 0)
+                            <a class="btn btn-primary btn-sm" href="admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-download"></i> 
+                                Descargar
+                            </a>
+                        @else
+                            <a class="btn btn-primary btn-sm" href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-download"></i> 
+                                Descargar
+                            </a>
+                        @endif
+                        <a href="{{ route('admin.files.show', $file)}}" class="btn btn-info btn-sm">
+                            <i class="fas fa-eye"></i>
+                             Consultar
+                        </a>
+                    </div>
                 </td>
             </tr>
         @endforeach

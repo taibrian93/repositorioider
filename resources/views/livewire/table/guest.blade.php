@@ -10,12 +10,12 @@
 
     @slot('head')
         <tr>
-            <th>Nro.</th>
-            <th>Titulo</th>
-            <th>Código</th>
-            <th>Nodo</th>
-            <th>Fecha Publicación</th>
-            <th>Fecha Actualización</th>
+            <th style="width: 5%">Nro.</th>
+            <th style="width: 41%">Titulo</th>
+            {{-- <th>Código</th> --}}
+            <th style="width: 10%">Nodo</th>
+            <th style="width: 17%">Fecha Registro</th>
+            <th style="width: 17%">Fecha Actualización</th>
             <th style="width: 10%">
         
             </th>
@@ -26,8 +26,8 @@
         @foreach ($files as $key => $file)
             <tr>
                 <td>{{ (($page-1)*10)+($key+1) }}</td>
-                <td>{{ $file->titulo }}</td>
-                <td>{{ $file->codigo }}</td>
+                <td style="text-align: justify;">{{ $file->titulo }}</td>
+                {{-- <td>{{ $file->codigo }}</td> --}}
                 <td>{{ $file->siglas }}</td>
                 <td>{{ $file->created_at->format('d/m/Y H:i') }}</td>
                 <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>

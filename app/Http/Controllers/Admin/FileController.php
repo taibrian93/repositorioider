@@ -155,33 +155,24 @@ class FileController extends Controller
      */
     public function show(File $file)
     {
-        $departments = Department::select('id', DB::raw("CONCAT(descripcion,' - ', codigoDepartamental) AS descripcion"))
-                    ->pluck('descripcion','id');
-        
-        $provinces = Province::select('id', DB::raw("CONCAT(provinces.descripcion,' - ', provinces.codigo) AS descripcion"))
-                    ->where('idDepartment', '=', $file->idDepartment)
-                    ->pluck('descripcion','id');
 
-        $districts = District::select('id', DB::raw("CONCAT(districts.descripcion,' - ', districts.codigo) AS descripcion"))
-                    ->where('idProvince', '=', $file->idProvince)
-                    ->pluck('descripcion','id');
-
-        $populationCenters = PopulationCenter::select('id', DB::raw("CONCAT(population_centers.descripcion,' - ', population_centers.codigo) AS descripcion"))
-                    ->where('idDistrict', '=', $file->idDistrict)
-                    ->pluck('descripcion', 'id');
-
-        $typeDocuments = TypeDocument::pluck('descripcion','id');
-        $typeFormats = TypeFormat::pluck('descripcion','id');
-        $languages = Language::pluck('descripcion','id');
-
-        $file = File::select('files.*','users.name')
+        $file = File::select('files.*','users.name', 'languages.descripcion AS language', 'nodes.descripcion AS node', 'type_documents.descripcion AS typeDocument', 'type_formats.descripcion AS typeFormat', 'departments.descripcion AS department', 'provinces.descripcion AS province', 'districts.descripcion AS district', 'population_centers.descripcion AS populationCenter')
                 ->leftJoin('users', 'users.id', '=', 'files.idUser')
+                ->leftJoin('departments', 'departments.id', '=', 'files.idDepartment')
+                ->leftJoin('provinces', 'provinces.id', '=', 'files.idProvince')
+                ->leftJoin('districts', 'districts.id', '=', 'files.idDistrict')
+                ->leftJoin('population_centers', 'population_centers.id', '=', 'files.idPopulationCenter')
+                ->leftJoin('nodes','nodes.id', '=', 'files.idNode')
+                ->leftJoin('languages','languages.id', '=', 'files.idLanguage')
+                ->leftJoin('type_documents', 'type_documents.id', '=', 'files.idTypeDocument')
+                ->leftJoin('type_formats', 'type_formats.id', '=', 'files.idTypeFormat')
                 ->where('files.id','=',$file->id)
                 ->first();
+        
+        $file->fechaDocumento = $file->fechaDocumento != null ? date('d-m-Y', strtotime($file->fechaDocumento)) : 'N/A';
 
-        $nodes = Node::pluck('descripcion','id');
 
-        return view('admin.files.show', compact('file','departments','provinces','districts', 'populationCenters','typeDocuments','nodes','typeFormats','languages'));
+        return view('admin.files.show', compact('file'));
     }
 
     /**
