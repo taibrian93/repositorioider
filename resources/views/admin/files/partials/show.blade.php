@@ -30,7 +30,7 @@
 </div>
 
 <div class="form-group">
-    <label for="">Encargado</label>
+    <label for="">Responsable de Publicación</label>
     <p class="bg-light text-dark p-3 rounded text-justify">{{ $file->name }}</p>
 </div>
 
