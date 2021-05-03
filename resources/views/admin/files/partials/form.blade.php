@@ -1,4 +1,71 @@
 <div class="form-group">
+    {!! Form::label('titulo', 'Titulo (*): ') !!}
+    {!! Form::text('titulo', null, ['class' => 'form-control' . ($errors->has('titulo') ? ' is-invalid' : ''), 'placeholder' => 'Escriba un titulo', 'style' => 'width:100%;']) !!}
+    @error('titulo')
+        <span class="invalid-feedback">
+            <strong>{{ $message }}</strong>
+        </span>    
+    @enderror
+    <small class="text-danger titulo_err">
+        
+    </small>  
+</div>
+
+<div class="form-group">
+    {!! Form::label('descripcion', 'Descripción (*): ') !!}
+    {!! Form::text('descripcion', null, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Escriba una descripción', 'style' => 'width:100%;']) !!}
+    @error('descripcion')
+        <span class="invalid-feedback">
+            <strong>{{ $message }}</strong>
+        </span>    
+    @enderror
+    <small class="text-danger descripcion_err">
+        
+    </small>
+</div>
+
+<div class="form-group">
+    {!! Form::label('tags', 'Palabras Clave (*): ') !!}
+    {!! Form::text('tags', $file->tagList ?? null, ['class' => 'form-control tagin' . ($errors->has('tags') ? ' is-invalid' : ''), 'data-placeholder' =>  'Escribe una etiqueta', 'data-separator' => ',']) !!}
+    @error('tags')
+        <span class="invalid-feedback">
+            <strong>{{ $message }}</strong>
+        </span>    
+    @enderror
+    <small class="text-danger tags_err">
+        
+    </small>
+</div>
+
+<div class="form-group">
+    {!! Form::label('name', 'Lenguaje (*): ') !!}
+    {!! Form::select('idLanguage',$languages, null, ['class' => 'form-control language', 'placeholder' => 'Seleccione Lenguaje...', 'style' => 'width:100%;']) !!}
+    
+    @error('idLanguage')
+        <small class="text-danger">
+            <strong>{{ $message }}</strong>
+        </small>     
+    @enderror
+    <small class="text-danger idLanguage_err">
+        
+    </small>
+</div>
+
+<div class="form-group">
+    {!! Form::label('name', 'Tipo Documento (*): ') !!}
+    {!! Form::select('idTypeDocument',$typeDocuments, null, ['class' => 'form-control typeDocument', 'placeholder' => 'Seleccione Tipo Documento...', 'style' => 'width:100%;']) !!}
+    
+    @error('idTypeDocument')
+        <small class="text-danger">
+            <strong>{{ $message }}</strong>
+        </small>     
+    @enderror
+    <small class="text-danger idTypeDocument_err">
+        
+    </small>
+</div>
+
+<div class="form-group">
     {!! Form::label('name', 'Departamento (*): ') !!}
     {!! Form::select('idDepartment',$departments, null, ['class' => 'form-control department', 'placeholder' => 'Seleccione Departamento...', 'style' => 'width:100%;']) !!}
     
@@ -56,75 +123,8 @@
 </div>
 
 <div class="form-group">
-    {!! Form::label('name', 'Tipo Documento (*): ') !!}
-    {!! Form::select('idTypeDocument',$typeDocuments, null, ['class' => 'form-control typeDocument', 'placeholder' => 'Seleccione Tipo Documento...', 'style' => 'width:100%;']) !!}
-    
-    @error('idTypeDocument')
-        <small class="text-danger">
-            <strong>{{ $message }}</strong>
-        </small>     
-    @enderror
-    <small class="text-danger idTypeDocument_err">
-        
-    </small>
-</div>
-
-<div class="form-group">
-    {!! Form::label('name', 'Lenguaje (*): ') !!}
-    {!! Form::select('idLanguage',$languages, null, ['class' => 'form-control language', 'placeholder' => 'Seleccione Lenguaje...', 'style' => 'width:100%;']) !!}
-    
-    @error('idLanguage')
-        <small class="text-danger">
-            <strong>{{ $message }}</strong>
-        </small>     
-    @enderror
-    <small class="text-danger idLanguage_err">
-        
-    </small>
-</div>
-
-<div class="form-group">
-    {!! Form::label('titulo', 'Titulo (*): ') !!}
-    {!! Form::text('titulo', null, ['class' => 'form-control' . ($errors->has('titulo') ? ' is-invalid' : ''), 'placeholder' => 'Escriba un titulo', 'style' => 'width:100%;']) !!}
-    @error('titulo')
-        <span class="invalid-feedback">
-            <strong>{{ $message }}</strong>
-        </span>    
-    @enderror
-    <small class="text-danger titulo_err">
-        
-    </small>  
-</div>
-
-<div class="form-group">
-    {!! Form::label('descripcion', 'Descripción (*): ') !!}
-    {!! Form::text('descripcion', null, ['class' => 'form-control' . ($errors->has('descripcion') ? ' is-invalid' : ''), 'placeholder' => 'Escriba una descripción', 'style' => 'width:100%;']) !!}
-    @error('descripcion')
-        <span class="invalid-feedback">
-            <strong>{{ $message }}</strong>
-        </span>    
-    @enderror
-    <small class="text-danger descripcion_err">
-        
-    </small>
-</div>
-
-<div class="form-group">
     {!! Form::label('fecha', 'Fecha Documento: ') !!}
     {!! Form::text('fechaDocumento', null, ['class' => 'form-control datemask' . ($errors->has('fechaDocumento') ? ' is-invalid' : ''), 'style' => 'width:100%;', 'data-inputmask-alias' => 'datetime', 'data-inputmask-inputformat' => 'dd/mm/yyyy', 'data-mask' => '']) !!}
-</div>
-
-<div class="form-group">
-    {!! Form::label('tags', 'Palabras Clave (*): ') !!}
-    {!! Form::text('tags', $file->tagList ?? null, ['class' => 'form-control tagin' . ($errors->has('tags') ? ' is-invalid' : ''), 'data-placeholder' =>  'Escribe una etiqueta', 'data-separator' => ',']) !!}
-    @error('tags')
-        <span class="invalid-feedback">
-            <strong>{{ $message }}</strong>
-        </span>    
-    @enderror
-    <small class="text-danger tags_err">
-        
-    </small>
 </div>
 
 <div class="form-group">

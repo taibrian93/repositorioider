@@ -23,5 +23,5 @@ Route::get('/', [GuestController::class, 'index']);
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
+    // return view('dashboard');
 })->name('dashboard');
