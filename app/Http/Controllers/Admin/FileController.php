@@ -52,9 +52,9 @@ class FileController extends Controller
      */
     public function create()
     {
-        $departments = Department::select('id', DB::raw('CONCAT(descripcion, " - ", codigoDepartamental) AS descripcion'))->pluck('descripcion','id');
-        $typeDocuments = TypeDocument::pluck('descripcion','id');
-        $languages = Language::pluck('descripcion','id');
+        $departments = Department::select('id', DB::raw('CONCAT(descripcion, " - ", codigoDepartamental) AS descripcion'))->orderBy('descripcion','asc')->pluck('descripcion','id');
+        $typeDocuments = TypeDocument::orderBy('descripcion','asc')->pluck('descripcion','id');
+        $languages = Language::orderBy('descripcion','asc')->pluck('descripcion','id');
         return view('admin.files.create',compact('departments','typeDocuments','languages'));
     }
 
