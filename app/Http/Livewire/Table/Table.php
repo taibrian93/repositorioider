@@ -200,9 +200,11 @@ class Table extends Component
 
                 if($this->check == 0){
 
-                    $files = $this->model::where('idUser','=', Auth::user()->id)
+                    $files = $this->model::select('files.*', 'type_documents.descripcion AS tipoDocumento')
+                            ->leftJoin('type_documents', 'type_documents.id', '=', 'files.idTypeDocument')
+                            ->where('idUser','=', Auth::user()->id)
                             ->where('idNode', '=', Auth::user()->idNode)
-                            ->where($this->selectFilter,'LIKE','%'. $this->search .'%')
+                            ->where('files.'.$this->selectFilter,'LIKE','%'. $this->search .'%')
                             ->orderBy('id','desc')
                             ->paginate(10);
 

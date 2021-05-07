@@ -175,7 +175,7 @@
         <tr>
             <th>Nro.</th>
             <th>Titulo</th>
-            <th>Codigo</th>
+            <th>Tipo Documento</th>
             <th>Fecha Documento</th>
             <th>Fecha Registro</th>
             <th>Fecha Actualización</th>
@@ -189,7 +189,7 @@
                 <td>{{ (($page-1)*10)+($key+1) }}</td>
                 <td>{{ $file->titulo }}</td>
                 <td>
-                    @if ($file->estado == 0)
+                    {{-- @if ($file->estado == 0)
                         <a href="{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
                             {{ $file->codigo }}
                         </a>
@@ -197,7 +197,8 @@
                         <a href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
                             {{ $file->codigo }}
                         </a>
-                    @endif
+                    @endif --}}
+                    {{ $file->tipoDocumento }}
                 </td>
                 <td>
                     @if ($file->fechaDocumento != null) 
