@@ -215,7 +215,7 @@
                 <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>
                 <td>
                     <div class="btn-group">
-                        <a href="{{ route('admin.files.edit', $file)}}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('admin.files.edit', $file)}}" class="btn btn-secondary btn-sm">
                             <i class="fas fa-edit"></i>
                             Editar
                         </a>
@@ -232,7 +232,7 @@
                         @endcan
 
                         @if ($file->estado == 0)
-                            <a class="btn btn-primary btn-sm" href="admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
+                            <a class="btn btn-primary btn-sm" href="{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
                                 <i class="fas fa-download"></i> 
                                 Descargar
                             </a>
