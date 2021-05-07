@@ -230,7 +230,18 @@
                                 Eliminar
                             </a>
                         @endcan
-                        
+
+                        @if ($file->estado == 0)
+                            <a class="btn btn-primary btn-sm" href="admin/{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-download"></i> 
+                                Descargar
+                            </a>
+                            @else
+                            <a class="btn btn-primary btn-sm" href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
+                                <i class="fas fa-download"></i> 
+                                Descargar
+                            </a>
+                        @endif
                     </div>
                 </td>
             </tr>
