@@ -149,8 +149,8 @@
 
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="descripcion">Descripción</label>
-                            <input type="text" class="form-control" placeholder="Escribe una descripción" wire:model="result">
+                            <label for="descripcion">Etiqueta</label>
+                            <input type="text" class="form-control" placeholder="Escribe una etiqueta" wire:model="result">
                         </div>
                     </div>
                 </div>
@@ -189,15 +189,6 @@
                 <td>{{ (($page-1)*10)+($key+1) }}</td>
                 <td>{{ $file->titulo }}</td>
                 <td>
-                    {{-- @if ($file->estado == 0)
-                        <a href="{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
-                            {{ $file->codigo }}
-                        </a>
-                    @else
-                        <a href="{{ Storage::url($file->enlace) }}" target="_blank" rel="noopener noreferrer">
-                            {{ $file->codigo }}
-                        </a>
-                    @endif --}}
                     {{ $file->tipoDocumento }}
                 </td>
                 <td>
@@ -206,7 +197,7 @@
                         
                             
                     @else
-                            
+                        <p>N/A</p>
 
                     @endif
                    
@@ -224,12 +215,7 @@
                             <i class="fas fa-eye"></i>
                             Consultar
                         </a>
-                        @can('Eliminar Archivo')
-                            <a href="#" class="btn btn-danger btn-sm delete" idFile="{{ $file->id }}">
-                                <i class="fas fa-trash-alt"></i>
-                                Eliminar
-                            </a>
-                        @endcan
+                        
 
                         @if ($file->estado == 0)
                             <a class="btn btn-primary btn-sm" href="{{ $file->enlace }}" target="_blank" rel="noopener noreferrer">
@@ -242,6 +228,13 @@
                                 Descargar
                             </a>
                         @endif
+
+                        @can('Eliminar Archivo')
+                            <a href="#" class="btn btn-danger btn-sm delete" idFile="{{ $file->id }}">
+                                <i class="fas fa-trash-alt"></i>
+                                Eliminar
+                            </a>
+                        @endcan
                     </div>
                 </td>
             </tr>

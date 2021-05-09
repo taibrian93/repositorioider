@@ -296,7 +296,8 @@ class Table extends Component
             break;
 
             case 'guest':
-                $files = $this->model::select('files.*', 'nodes.siglas')
+                $files = $this->model::select('files.*', 'nodes.siglas', 'type_documents.descripcion AS tipoDocumento')
+                        ->leftJoin('type_documents', 'type_documents.id', '=', 'files.idTypeDocument')
                         ->leftJoin('nodes', 'nodes.id', '=', 'files.idNode')
                         ->where('files.estado', '=', 1)
                         ->where('files.'.$this->selectFilter,'LIKE','%'. $this->search .'%')

@@ -10,9 +10,9 @@
 
     @slot('head')
         <tr>
-            <th style="width: 5%">Nro.</th>
-            <th style="width: 41%">Titulo</th>
-            {{-- <th>Código</th> --}}
+            <th style="width: 4%">Nro.</th>
+            <th style="width: 26%">Titulo</th>
+            <th style="width: 16%">Tipo Documento</th>
             <th style="width: 10%">Nodo</th>
             <th style="width: 17%">Fecha Registro</th>
             <th style="width: 17%">Fecha Actualización</th>
@@ -27,10 +27,10 @@
             <tr>
                 <td>{{ (($page-1)*10)+($key+1) }}</td>
                 <td style="text-align: justify;">{{ $file->titulo }}</td>
-                {{-- <td>{{ $file->codigo }}</td> --}}
+                <td>{{ $file->tipoDocumento }}</td>
                 <td>{{ $file->siglas }}</td>
-                <td>{{ $file->created_at->format('d/m/Y H:i') }}</td>
-                <td>{{ $file->updated_at->format('d/m/Y H:i') }}</td>
+                <td>{{ $file->created_at->format('d/m/Y') }}</td>
+                <td>{{ $file->updated_at->format('d/m/Y') }}</td>
                 <td>
                     <div class="btn-group">
                         <a href="{{ Storage::url($file->enlace) }}" class="btn btn-primary btn-sm btn-block" target="_blank" style="width: 70px">
