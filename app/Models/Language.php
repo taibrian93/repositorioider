@@ -10,4 +10,8 @@ class Language extends Model
     use HasFactory;
 
     protected $fillable = ['descripcion', 'iso_639_1', 'codigo', 'estado'];
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

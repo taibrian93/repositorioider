@@ -10,4 +10,8 @@ class Node extends Model
     use HasFactory;
 
     protected $fillable = ['descripcion', 'siglas', 'observacion', 'codigo', 'estado'];
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

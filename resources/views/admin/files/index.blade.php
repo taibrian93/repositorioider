@@ -34,7 +34,14 @@
 
             var meta = $("meta[name='csrf-token']").attr("content");
             
-            
+            // for (const el of document.querySelectorAll('.tagin')) {
+            //     tagin (el)
+            // }
+
+            // $('.tagin-input').on('keyup', function(e){
+            //     console.log(e.target.value);
+            // });
+
 
             window.initSelectDrop=()=>{
                 $('.department').select2();
@@ -65,11 +72,21 @@
                     
                         
                     livewire.emit('getIdTypeFormat', e.target.value)
-                    //getListTypeExtensions($(this).val())
+                    
 
                     
                 } else {
                     livewire.emit('getIdTypeFormat', 0)
+                }
+            });
+
+            $('.language').on('change', function(e){
+                if($(this).val() != ''){
+                    
+                    livewire.emit('getIdLanguage', e.target.value)
+                    
+                } else {
+                    livewire.emit('getIdLanguage', 0)
                 }
             });
 

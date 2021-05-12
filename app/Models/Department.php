@@ -14,4 +14,8 @@ class Department extends Model
     public function provinces(){
         return $this->hasMany('App\Models\Province');
     }
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

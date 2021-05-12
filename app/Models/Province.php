@@ -18,4 +18,8 @@ class Province extends Model
     public function districts(){
         return $this->hasMany('App\Models\District');
     }
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

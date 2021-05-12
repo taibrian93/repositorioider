@@ -150,9 +150,16 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="descripcion">Etiqueta</label>
-                            <input type="text" class="form-control" placeholder="Escribe una etiqueta" wire:model="result">
+                            <input type="text" class="form-control" placeholder="Escribe una etiqueta" wire:model="tags">
                         </div>
                     </div>
+
+                    {{-- <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="descripcion">respuesta</label>
+                            <input type="text" class="form-control" placeholder="Escribe" wire:model="result">
+                        </div>
+                    </div> --}}
                 </div>
 
                 

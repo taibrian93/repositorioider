@@ -14,4 +14,8 @@ class PopulationCenter extends Model
     public function district(){
         return $this->belongsTo('App\Models\District','idDistrict','id');
     }
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }

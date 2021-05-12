@@ -23,7 +23,7 @@ class Table extends Component
     public $search = '';
     public $selectFilter = 'titulo';
     public $check = 0;
-    public $result = 0;
+    public $result = 'dsadsadas';
 
     public $idDepartment = 0;
     public $idProvince = 0;
@@ -36,6 +36,7 @@ class Table extends Component
     public $idNode = 0;
     public $titulo = "";
     public $descripcion = "";
+    public $tags = "";
 
     protected $listeners = [
         'getIdDepartment',
@@ -44,6 +45,7 @@ class Table extends Component
         'getIdPopulationCenter',
         'getIdTypeDocument',
         'getIdTypeFormat',
+        'getIdLanguage',
     ];
 
     public function getIdDepartment($idDepartment){
@@ -68,6 +70,10 @@ class Table extends Component
 
     public function getIdTypeFormat($idTypeFormat){
         $idTypeFormat > 0 ? $this->idTypeFormat = $idTypeFormat : $this->idTypeFormat = 0;
+    }
+
+    public function getIdLanguage($idLanguage){
+        $idLanguage > 0 ? $this->idLanguage = $idLanguage : $this->idLanguage = 0;
     }
 
     public function hydrate()
@@ -247,10 +253,6 @@ class Table extends Component
                         $files = $files->where('idLanguage', '=', $this->idLanguage);
                     }
 
-                    // if($this->idNode > 0){
-                    //     $files = $files->where('idNode', '=', $this->idNode);
-                    // }
-
                     if($this->titulo != ''){
                         $files = $files->where('titulo', 'LIKE', '%'.$this->titulo.'%');
                     }
@@ -259,11 +261,21 @@ class Table extends Component
                         $files = $files->where('descripcion', 'LIKE', '%'.$this->descripcion.'%');
                     }
 
+                    if($this->tags != ''){
+                        $arrayTag = explode(',', $this->tags);
+
+                        foreach($arrayTag as $tag){
+                            $files = $files->whereHas('tags', function ($query) use ($tag) {
+                                $query->where('normalized', 'LIKE', '%'.strtolower($tag).'%');
+                            });
+                        }
+                    }
+
 
                     $files = $files->paginate(10);
+                    
                 }
-
-                $this->result = $this->idPopulationCenter;
+                //$this->result = $this->idPopulationCenter;
 
                 $departments = Department::select('id', DB::raw('CONCAT(descripcion, " - ", codigoDepartamental) AS descripcion'))->pluck('descripcion','id');               
                 $typeDocuments = TypeDocument::pluck('descripcion','id');

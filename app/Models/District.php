@@ -19,4 +19,8 @@ class District extends Model
     public function populationCenters(){
         return $this->hasMany('App\Models\PopulationCenter');
     }
+
+    public function files(){
+        return $this->hasMany('App\Models\File');
+    }
 }
