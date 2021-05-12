@@ -216,49 +216,51 @@ class Table extends Component
 
                 } elseif($this->check == 1) {
                     
-                    $files = $this->model::where('idUser', '=', Auth::user()->id)
+                    $files = $this->model::select('files.*', 'type_documents.descripcion AS tipoDocumento')
+                            ->leftJoin('type_documents', 'type_documents.id', '=', 'files.idTypeDocument')
+                            ->where('idUser', '=', Auth::user()->id)
                             ->where('idNode', '=', Auth::user()->idNode)
                             ->orderBy('id','desc');
                             
                     
                     if($this->idDepartment > 0){
-                        $files = $files->where('idDepartment', '=', $this->idDepartment);
+                        $files = $files->where('files.idDepartment', '=', $this->idDepartment);
                     }
 
                     if($this->idProvince > 0){
-                        $files = $files->where('idProvince', '=', $this->idProvince);
+                        $files = $files->where('files.idProvince', '=', $this->idProvince);
                     }
 
                     if($this->idDistrict > 0){
-                        $files = $files->where('idDistrict', '=', $this->idDistrict);
+                        $files = $files->where('files.idDistrict', '=', $this->idDistrict);
                     }
 
                     if($this->idPopulationCenter > 0){
-                        $files = $files->where('idPopulationCenter', '=', $this->idPopulationCenter);
+                        $files = $files->where('files.idPopulationCenter', '=', $this->idPopulationCenter);
                     }
 
                     if($this->idTypeDocument > 0){
-                        $files = $files->where('idTypeDocument', '=', $this->idTypeDocument);
+                        $files = $files->where('files.idTypeDocument', '=', $this->idTypeDocument);
                     }
 
                     if($this->idTypeFormat > 0){
-                        $files = $files->where('idTypeFormat', '=', $this->idTypeFormat);
+                        $files = $files->where('files.idTypeFormat', '=', $this->idTypeFormat);
                     }
 
                     if($this->idTypeExtension > 0){
-                        $files = $files->where('idTypeExtension', '=', $this->idTypeExtension);
+                        $files = $files->where('files.idTypeExtension', '=', $this->idTypeExtension);
                     }
 
                     if($this->idLanguage > 0){
-                        $files = $files->where('idLanguage', '=', $this->idLanguage);
+                        $files = $files->where('files.idLanguage', '=', $this->idLanguage);
                     }
 
                     if($this->titulo != ''){
-                        $files = $files->where('titulo', 'LIKE', '%'.$this->titulo.'%');
+                        $files = $files->where('files.titulo', 'LIKE', '%'.$this->titulo.'%');
                     }
 
                     if($this->descripcion != ''){
-                        $files = $files->where('descripcion', 'LIKE', '%'.$this->descripcion.'%');
+                        $files = $files->where('files.descripcion', 'LIKE', '%'.$this->descripcion.'%');
                     }
 
                     if($this->tags != ''){
